@@ -39,7 +39,7 @@ body{
   color:var(--fg);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  overflow-x:clip;
 }
 h1,h2,h3,.display{font-family:'Orbitron',sans-serif;letter-spacing:-.01em;line-height:1.1}
 a{color:inherit;text-decoration:none}
@@ -102,7 +102,7 @@ header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
 
 /* ============ HERO ============ */
 .hero{padding:64px 0 40px}
-.hero-grid{display:grid;grid-template-columns:1.04fr 1fr;gap:40px;align-items:center}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);gap:40px;align-items:center}
 .eyebrow{display:inline-flex;align-items:center;gap:9px;padding:7px 15px;border-radius:999px;
   border:1px solid var(--border-2);background:rgba(34,224,123,.06);color:var(--accent);
   font-size:.82rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:22px}
@@ -117,7 +117,7 @@ header.nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
 .hero-trust svg{width:18px;height:18px;color:var(--accent)}
 
 /* ============ ANIMATION SCENE ============ */
-.stage{display:flex;align-items:center;justify-content:center;min-height:560px}
+.stage{display:flex;align-items:center;justify-content:center;min-height:560px;overflow:hidden;width:100%}
 .scene{position:relative;width:520px;height:520px;flex:0 0 auto}
 .scene .ambient{position:absolute;inset:0;border-radius:50%;
   background:radial-gradient(circle at 50% 45%,rgba(34,224,123,.16),transparent 60%);filter:blur(10px)}
@@ -403,8 +403,8 @@ footer{border-top:1px solid var(--border);padding:48px 0 36px;margin-top:80px}
 /* ============ RESPONSIVE ============ */
 @media(max-width:980px){
   .wrap{padding:0 20px}
-  .hero-grid{grid-template-columns:1fr;gap:20px}
-  .stage{order:-1;min-height:480px}
+  .hero-grid{grid-template-columns:minmax(0,1fr);gap:20px}
+  .stage{order:-1;min-height:0;height:520px}
   .bento{grid-template-columns:repeat(2,1fr)}
   .bcard.big{grid-column:span 2;grid-row:span 1;flex-direction:row;align-items:center;gap:20px}
   .bcard.big .barz{display:none}
@@ -434,10 +434,10 @@ footer{border-top:1px solid var(--border);padding:48px 0 36px;margin-top:80px}
 }
 @media(max-width:560px){
   .hero{padding:40px 0 24px}
-  .scene{transform:scale(.66);transform-origin:center}
-  .stage{min-height:380px}
+  .scene{transform:scale(.64);transform-origin:center}
+  .stage{height:340px}
   .bento{grid-template-columns:1fr}
-  .bcard.big{flex-direction:column;align-items:flex-start}
+  .bcard.big{grid-column:span 1;flex-direction:column;align-items:flex-start}
   .bcard.wide{grid-column:span 1;flex-direction:column;align-items:flex-start;gap:14px}
   .price-card{padding:28px 22px}
   .cta-band{margin:0 16px;padding:44px 22px}
@@ -445,10 +445,11 @@ footer{border-top:1px solid var(--border);padding:48px 0 36px;margin-top:80px}
   .logo .mark{width:32px;height:32px}
 }
 @media(max-width:420px){
-  .scene{transform:scale(.56)}
-  .stage{min-height:320px}
+  .scene{transform:scale(.54)}
+  .stage{height:290px}
   .hero-cta,.hero-trust{gap:12px}
-  .btn{padding:13px 20px;font-size:.92rem}
+  .hero-cta .btn{flex:1 1 auto;justify-content:center}
+  .btn{padding:13px 18px;font-size:.9rem}
 }
 @media(prefers-reduced-motion:reduce){
   .phone-rig{animation:none;transform:translate(2px,4px) scale(1.05)}
